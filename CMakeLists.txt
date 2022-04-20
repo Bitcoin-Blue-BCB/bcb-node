@@ -4,6 +4,7 @@ if(CMAKE_VERSION VERSION_GREATER 3.12 OR CMAKE_VERSION VERSION_EQUAL 3.12)
   # find_package uses <PACKAGENAME>_ROOT variables
   cmake_policy(SET CMP0074 NEW)
 endif()
+
 if(CMAKE_VERSION VERSION_GREATER 3.13 OR CMAKE_VERSION VERSION_EQUAL 3.13)
   # option honors normal variables
   cmake_policy(SET CMP0077 NEW)
@@ -19,7 +20,7 @@ set(CMAKE_OSX_DEPLOYMENT_TARGET
     10.14
     CACHE STRING "")
 
-project(nano-node)
+project(bcb-node)
 
 # Get the latest abbreviated commit hash of the working branch
 execute_process(
@@ -46,11 +47,11 @@ if(MSVC)
   add_definitions(/MP)
 endif()
 
-set(CPACK_PACKAGE_VERSION_MAJOR "24")
+set(CPACK_PACKAGE_VERSION_MAJOR "1")
 set(CPACK_PACKAGE_VERSION_MINOR "0")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
-set(CPACK_PACKAGE_VERSION_PRE_RELEASE "99")
-set(CPACK_PACKAGE_VENDOR "Nano Currency")
+set(CPACK_PACKAGE_VERSION_PRE_RELEASE "0")
+set(CPACK_PACKAGE_VENDOR "Bitcoin Blue")
 
 if(CI_BUILD)
   set(TAG_VERSION_STRING "$ENV{TRAVIS_TAG}")
@@ -168,41 +169,41 @@ set_property(
   CACHE ACTIVE_NETWORK PROPERTY STRINGS nano_dev_network nano_beta_network
                                 nano_live_network nano_test_network)
 set(CPACK_PACKAGE_NAME
-    "nano-node"
+    "bcb-node"
     CACHE STRING "" FORCE)
 set(CPACK_NSIS_PACKAGE_NAME
-    "Nano"
+    "BCB"
     CACHE STRING "" FORCE)
 set(CPACK_PACKAGE_INSTALL_DIRECTORY
-    "nanocurrency"
+    "bitcoinblue"
     CACHE STRING "" FORCE)
-set(NANO_SERVICE "nanocurrency.service")
+set(NANO_SERVICE "bitcoinblue.service")
 set(NANO_PREFIX "")
 if("${ACTIVE_NETWORK}" MATCHES "nano_beta_network")
-  project("nano-node-beta")
+  project("bcb-node-beta")
   set(CPACK_PACKAGE_NAME
-      "nano-node-beta"
+      "bcb-node-beta"
       CACHE STRING "" FORCE)
   set(CPACK_NSIS_PACKAGE_NAME
       "Nano-Beta"
       CACHE STRING "" FORCE)
   set(CPACK_PACKAGE_INSTALL_DIRECTORY
-      "nanocurrency-beta"
+      "bitcoinblue-beta"
       CACHE STRING "" FORCE)
-  set(NANO_SERVICE "nanocurrency-beta.service")
+  set(NANO_SERVICE "bitcoinblue-beta.service")
   set(NANO_PREFIX "Beta")
 elseif("${ACTIVE_NETWORK}" MATCHES "nano_test_network")
-  project("nano-node-test")
+  project("bcb-node-test")
   set(CPACK_PACKAGE_NAME
-      "nano-node-test"
+      "bcb-node-test"
       CACHE STRING "" FORCE)
   set(CPACK_NSIS_PACKAGE_NAME
       "Nano-Test"
       CACHE STRING "" FORCE)
   set(CPACK_PACKAGE_INSTALL_DIRECTORY
-      "nanocurrency-test"
+      "bitcoinblue-test"
       CACHE STRING "" FORCE)
-  set(NANO_SERVICE "nanocurrency-test.service")
+  set(NANO_SERVICE "bitcoinblue-test.service")
   set(NANO_PREFIX "Test")
 endif()
 set(NANO_OSX_PACKAGE_NAME
@@ -785,11 +786,11 @@ if(NANO_GUI OR RAIBLOCKS_GUI)
         "DeleteRegKey HKLM 'SYSTEM\\\\CurrentControlSet\\\\Services\\\\EventLog\\\\Nano${NANO_PREFIX}'"
     )
     set(CPACK_NSIS_MUI_ICON ${CMAKE_SOURCE_DIR}/Nano.ico)
-    set(CPACK_NSIS_DISPLAY_NAME "Nano${NANO_PREFIX}")
-    set(CPACK_NSIS_URL_INFO_ABOUT "https://nano.org")
-    set(CPACK_NSIS_CONTACT "info@nano.org")
-    set(CPACK_NSIS_MENU_LINKS "nano_wallet.exe" "Nano Wallet"
-                              "https://nano.org" "Nano website")
+    set(CPACK_NSIS_DISPLAY_NAME "BCB${NANO_PREFIX}")
+    set(CPACK_NSIS_URL_INFO_ABOUT "https://bitcoinblue.app")
+    set(CPACK_NSIS_CONTACT "info@bitcoinblue.app")
+    set(CPACK_NSIS_MENU_LINKS "bcb_wallet.exe" "BCB Wallet"
+                              "https://bitcoinblue.app" "Bitcoin Blue website")
     set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
     get_target_property(Qt5WindowsPlugin Qt5::QWindowsIntegrationPlugin
                         LOCATION)
