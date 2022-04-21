@@ -67,13 +67,13 @@ enum class networks : uint16_t
 {
 	invalid = 0x0,
 	// Low work parameters, publicly known genesis key, dev IP ports
-	nano_dev_network = 0x5241, // 'R', 'A'
+	nano_dev_network = 0x4241, // 'B', 'A'
 	// Normal work parameters, secret beta genesis key, beta IP ports
-	nano_beta_network = 0x5242, // 'R', 'B'
+	nano_beta_network = 0x4242, // 'B', 'B'
 	// Normal work parameters, secret live key, live IP ports
-	nano_live_network = 0x5243, // 'R', 'C'
+	nano_live_network = 0x4243, // 'B', 'C'
 	// Normal work parameters, secret test genesis key, test IP ports
-	nano_test_network = 0x5258, // 'R', 'X'
+	nano_test_network = 0x4258, // 'B', 'X'
 };
 
 enum class work_version
@@ -141,16 +141,16 @@ public:
 		// A representative is classified as principal based on its weight and this factor
 		principal_weight_factor = 1000; // 0.1%
 
-		default_node_port = is_live_network () ? 7075 : is_beta_network () ? 54000
+		default_node_port = is_live_network () ? 7095 : is_beta_network () ? 54000
 		: is_test_network ()                                               ? test_node_port ()
 																		   : 44000;
-		default_rpc_port = is_live_network () ? 7076 : is_beta_network () ? 55000
+		default_rpc_port = is_live_network () ? 7096 : is_beta_network () ? 55000
 		: is_test_network ()                                              ? test_rpc_port ()
 																		  : 45000;
-		default_ipc_port = is_live_network () ? 7077 : is_beta_network () ? 56000
+		default_ipc_port = is_live_network () ? 7097 : is_beta_network () ? 56000
 		: is_test_network ()                                              ? test_ipc_port ()
 																		  : 46000;
-		default_websocket_port = is_live_network () ? 7078 : is_beta_network () ? 57000
+		default_websocket_port = is_live_network () ? 7098 : is_beta_network () ? 57000
 		: is_test_network ()                                                    ? test_websocket_port ()
 																				: 47000;
 		request_interval_ms = is_dev_network () ? 20 : 500;

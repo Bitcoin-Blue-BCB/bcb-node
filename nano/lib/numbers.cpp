@@ -51,7 +51,7 @@ void nano::public_key::encode_account (std::string & destination_a) const
 		number_l >>= 5;
 		destination_a.push_back (account_encode (r));
 	}
-	destination_a.append ("_onan"); // nano_
+	destination_a.append ("_bcb"); // bcb_
 	std::reverse (destination_a.begin (), destination_a.end ());
 }
 
@@ -87,15 +87,16 @@ bool nano::public_key::decode_account (std::string const & source_a)
 	auto error (source_a.size () < 5);
 	if (!error)
 	{
+		auto bcb_prefix (source_a[0] == 'b' && source_a[1] == 'c' && source_a[2] == 'b' && (source_a[3] == '_' || source_a[3] == '-'));
 		auto xrb_prefix (source_a[0] == 'x' && source_a[1] == 'r' && source_a[2] == 'b' && (source_a[3] == '_' || source_a[3] == '-'));
 		auto nano_prefix (source_a[0] == 'n' && source_a[1] == 'a' && source_a[2] == 'n' && source_a[3] == 'o' && (source_a[4] == '_' || source_a[4] == '-'));
 		auto node_id_prefix = (source_a[0] == 'n' && source_a[1] == 'o' && source_a[2] == 'd' && source_a[3] == 'e' && source_a[4] == '_');
-		error = (xrb_prefix && source_a.size () != 64) || (nano_prefix && source_a.size () != 65);
+		error = (bcb_prefix && xrb_prefix && source_a.size () != 64) || (nano_prefix && source_a.size () != 65);
 		if (!error)
 		{
-			if (xrb_prefix || nano_prefix || node_id_prefix)
+			if (bcb_prefix || xrb_prefix || nano_prefix || node_id_prefix)
 			{
-				auto i (source_a.begin () + (xrb_prefix ? 4 : 5));
+				auto i (source_a.begin () + (bcb_prefix || xrb_prefix ? 4 : 5));
 				if (*i == '1' || *i == '3')
 				{
 					nano::uint512_t number_l;
@@ -116,18 +117,14 @@ bool nano::public_key::decode_account (std::string const & source_a)
 					}
 					if (!error)
 					{
-						nano::public_key temp = (number_l >> 40).convert_to<nano::uint256_t> ();
+						*this = (number_l >> 40).convert_to<nano::uint256_t> ();
 						uint64_t check (number_l & static_cast<uint64_t> (0xffffffffff));
 						uint64_t validation (0);
 						blake2b_state hash;
 						blake2b_init (&hash, 5);
-						blake2b_update (&hash, temp.bytes.data (), temp.bytes.size ());
+						blake2b_update (&hash, bytes.data (), bytes.size ());
 						blake2b_final (&hash, reinterpret_cast<uint8_t *> (&validation), 5);
 						error = check != validation;
-						if (!error)
-						{
-							*this = temp;
-						}
 					}
 				}
 				else

@@ -29,7 +29,7 @@ namespace
 char const * dev_private_key_data = "34F0A37AAD20F4A260F0A5B3CB3D7FB50673212263E58A380BC10474BB039CE4";
 char const * dev_public_key_data = "B0311EA55708D6A53C75CDBF88300259C6D018522FE3D4D0A242E431F9E8B6D0"; // xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo
 char const * beta_public_key_data = "259A43ABDB779E97452E188BA3EB951B41C961D3318CA6B925380F4D99F0577A"; // nano_1betagoxpxwykx4kw86dnhosc8t3s7ix8eeentwkcg1hbpez1outjrcyg4n1
-char const * live_public_key_data = "E89208DD038FBB269987689621D52292AE9C35941A7484756ECCED92A65093BA"; // xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3
+char const * live_public_key_data = "4040810C5A1AF8ACAA9E1E63D97DF846515C3263885A00DB240E85FDC20A3CB8"; // xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3
 std::string const test_public_key_data = nano::get_env_or_default ("NANO_TEST_GENESIS_PUB", "45C6FF9D1706D61F0821327752671BDA9F9ED2DA40326B01935AB566FB9E08ED"); // nano_1jg8zygjg3pp5w644emqcbmjqpnzmubfni3kfe1s8pooeuxsw49fdq1mco9j
 char const * dev_genesis_data = R"%%%({
 	"type": "open",
@@ -51,11 +51,11 @@ char const * beta_genesis_data = R"%%%({
 
 char const * live_genesis_data = R"%%%({
 	"type": "open",
-	"source": "E89208DD038FBB269987689621D52292AE9C35941A7484756ECCED92A65093BA",
-	"representative": "xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3",
-	"account": "xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3",
-	"work": "62f05417dd3fb691",
-	"signature": "9F0C933C8ADE004D808EA1985FA746A7E95BA2A38F867640F53EC8F180BDFE9E2C1268DEAD7C2664F356E37ABA362BC58E46DBA03E523A7B5A19E4B6EB12BB02"
+	"source": "4040810C5A1AF8ACAA9E1E63D97DF846515C3263885A00DB240E85FDC20A3CB8",
+	"representative": "bcb_1i41i687n8qrokobw9m5u7yzijkjdis8944t15fka5n7zq31nh7rswnqznu8",
+	"account": "bcb_1i41i687n8qrokobw9m5u7yzijkjdis8944t15fka5n7zq31nh7rswnqznu8",
+	"work": "85463522d25672a4",
+	"signature": "7530904978288D012A1CD3376025A96B2EE1FA469A38C5028C16DF0EB73D2D6C5C1995F00BE6194D29995854D99C84446A388D160B25AE18409BE870C2BE9706"
     })%%%";
 
 std::string const test_genesis_data = nano::get_env_or_default ("NANO_TEST_GENESIS_BLOCK", R"%%%({
